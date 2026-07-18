@@ -1,34 +1,22 @@
 {
-  "item.create_upgrades.upgrade_applicator": "Upgrade Applicator",
-  "item.create_upgrades.speed_upgrade_1": "Speed Upgrade I",
-  "item.create_upgrades.speed_upgrade_2": "Speed Upgrade II",
-  "item.create_upgrades.speed_upgrade_3": "Speed Upgrade III",
-  "item.create_upgrades.speed_upgrade_4": "Speed Upgrade IV",
-  "item.create_upgrades.efficiency_upgrade_1": "Efficiency Upgrade I",
-  "item.create_upgrades.efficiency_upgrade_2": "Efficiency Upgrade II",
-  "item.create_upgrades.efficiency_upgrade_3": "Efficiency Upgrade III",
-  "item.create_upgrades.efficiency_upgrade_4": "Efficiency Upgrade IV",
-  "item.create_upgrades.stress_upgrade_1": "Stress Upgrade I",
-  "item.create_upgrades.stress_upgrade_2": "Stress Upgrade II",
-  "item.create_upgrades.stress_upgrade_3": "Stress Upgrade III",
-  "item.create_upgrades.stress_upgrade_4": "Stress Upgrade IV",
-  "item.create_upgrades.range_upgrade_1": "Range Upgrade I",
-  "item.create_upgrades.range_upgrade_2": "Range Upgrade II",
-  "item.create_upgrades.range_upgrade_3": "Range Upgrade III",
-  "item.create_upgrades.range_upgrade_4": "Range Upgrade IV",
+  "item.create_upgrades.module_applicator": "Module Applicator",
+  "item.create_upgrades.speed_module": "Speed Module",
+  "item.create_upgrades.efficiency_module": "Efficiency Module",
+  "item.create_upgrades.fortune_module": "Fortune Module",
 
-  "upgrade.create_upgrades.speed": "Speed",
-  "upgrade.create_upgrades.efficiency": "Efficiency",
-  "upgrade.create_upgrades.stress": "Stress Relief",
-  "upgrade.create_upgrades.range": "Range",
+  "tooltip.create_upgrades.speed_module.benefit": "Processing Speed %s",
+  "tooltip.create_upgrades.speed_module.drawback": "Stress Consumption %s",
 
-  "tooltip.create_upgrades.level": "Level: %s",
-  "tooltip.create_upgrades.speed_mult": "Speed: %s",
-  "tooltip.create_upgrades.stress_mult": "Stress Cost: %s",
-  "tooltip.create_upgrades.process_mult": "Processing: %s",
-  "tooltip.create_upgrades.range_bonus": "Range: +%s blocks",
-  "tooltip.create_upgrades.applicator": "Right-click a Create machine to manage upgrades.",
-  "item.create_upgrades.applicator.not_supported": "This machine does not support upgrades.",
+  "tooltip.create_upgrades.efficiency_module.benefit": "Stress Consumption %s",
+  "tooltip.create_upgrades.efficiency_module.drawback": "Processing Speed %s",
 
-  "gui.create_upgrades.title": "Machine Upgrades"
+  "tooltip.create_upgrades.fortune_module.benefit": "%s chance for bonus output",
+  "tooltip.create_upgrades.fortune_module.drawback": "Durability decreases each process",
+  "tooltip.create_upgrades.fortune_module.durability": "Durability: %s / %s",
+
+  "tooltip.create_upgrades.module_slot_hint": "Apply with Module Applicator",
+  "tooltip.create_upgrades.applicator": "Right-click a Create machine to manage modules.",
+  "item.create_upgrades.applicator.not_supported": "This machine does not support modules.",
+
+  "gui.create_upgrades.title": "Machine Modules"
 }

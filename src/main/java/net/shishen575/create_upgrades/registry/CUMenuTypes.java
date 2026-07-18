@@ -6,16 +6,16 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.shishen575.create_upgrades.content.gui.UpgradeMenu;
+import net.shishen575.create_upgrades.content.gui.ModuleMenu;
 
 public class CUMenuTypes {
 
     public static final DeferredRegister<MenuType<?>> MENU_TYPES =
         DeferredRegister.create(ForgeRegistries.MENU_TYPES, "create_upgrades");
 
-    public static final RegistryObject<MenuType<UpgradeMenu>> UPGRADE_MENU =
-        MENU_TYPES.register("upgrade_menu",
-            () -> IForgeMenuType.create(UpgradeMenu::new));
+    public static final RegistryObject<MenuType<ModuleMenu>> MODULE_MENU =
+        MENU_TYPES.register("module_menu",
+            () -> IForgeMenuType.create(ModuleMenu::new));
 
     public static void register(IEventBus bus) {
         MENU_TYPES.register(bus);

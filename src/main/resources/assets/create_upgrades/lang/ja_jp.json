@@ -1,34 +1,22 @@
 {
-  "item.create_upgrades.upgrade_applicator": "アップグレード適用器",
-  "item.create_upgrades.speed_upgrade_1": "速度アップグレード I",
-  "item.create_upgrades.speed_upgrade_2": "速度アップグレード II",
-  "item.create_upgrades.speed_upgrade_3": "速度アップグレード III",
-  "item.create_upgrades.speed_upgrade_4": "速度アップグレード IV",
-  "item.create_upgrades.efficiency_upgrade_1": "効率アップグレード I",
-  "item.create_upgrades.efficiency_upgrade_2": "効率アップグレード II",
-  "item.create_upgrades.efficiency_upgrade_3": "効率アップグレード III",
-  "item.create_upgrades.efficiency_upgrade_4": "効率アップグレード IV",
-  "item.create_upgrades.stress_upgrade_1": "ストレス軽減アップグレード I",
-  "item.create_upgrades.stress_upgrade_2": "ストレス軽減アップグレード II",
-  "item.create_upgrades.stress_upgrade_3": "ストレス軽減アップグレード III",
-  "item.create_upgrades.stress_upgrade_4": "ストレス軽減アップグレード IV",
-  "item.create_upgrades.range_upgrade_1": "範囲アップグレード I",
-  "item.create_upgrades.range_upgrade_2": "範囲アップグレード II",
-  "item.create_upgrades.range_upgrade_3": "範囲アップグレード III",
-  "item.create_upgrades.range_upgrade_4": "範囲アップグレード IV",
+  "item.create_upgrades.module_applicator": "モジュール適用器",
+  "item.create_upgrades.speed_module": "速度モジュール",
+  "item.create_upgrades.efficiency_module": "効率モジュール",
+  "item.create_upgrades.fortune_module": "幸運モジュール",
 
-  "upgrade.create_upgrades.speed": "速度",
-  "upgrade.create_upgrades.efficiency": "効率",
-  "upgrade.create_upgrades.stress": "ストレス軽減",
-  "upgrade.create_upgrades.range": "範囲",
+  "tooltip.create_upgrades.speed_module.benefit": "処理速度 %s",
+  "tooltip.create_upgrades.speed_module.drawback": "ストレス消費 %s",
 
-  "tooltip.create_upgrades.level": "レベル: %s",
-  "tooltip.create_upgrades.speed_mult": "速度: %s",
-  "tooltip.create_upgrades.stress_mult": "ストレス消費: %s",
-  "tooltip.create_upgrades.process_mult": "処理速度: %s",
-  "tooltip.create_upgrades.range_bonus": "範囲: +%s ブロック",
-  "tooltip.create_upgrades.applicator": "右クリックでCreate機械のアップグレードを管理します。",
-  "item.create_upgrades.applicator.not_supported": "この機械はアップグレードに対応していません。",
+  "tooltip.create_upgrades.efficiency_module.benefit": "ストレス消費 %s",
+  "tooltip.create_upgrades.efficiency_module.drawback": "処理速度 %s",
 
-  "gui.create_upgrades.title": "機械アップグレード"
+  "tooltip.create_upgrades.fortune_module.benefit": "+%s の確率で副産物追加",
+  "tooltip.create_upgrades.fortune_module.drawback": "処理ごとに耐久が減少",
+  "tooltip.create_upgrades.fortune_module.durability": "耐久: %s / %s",
+
+  "tooltip.create_upgrades.module_slot_hint": "モジュール適用器で機械に装着",
+  "tooltip.create_upgrades.applicator": "右クリックでCreate機械のモジュールを管理します。",
+  "item.create_upgrades.applicator.not_supported": "この機械��モジュールに対応していません。",
+
+  "gui.create_upgrades.title": "機械モジュール"
 }
