@@ -11,15 +11,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.shishen575.create_upgrades.api.IUpgradeable;
+import net.shishen575.create_upgrades.api.IModuleHolder;
+import net.shishen575.create_upgrades.content.gui.ModuleMenu;
 
 import java.util.List;
 
-/**
- * アップグレード設定ツール。
- * Create の機械 (IUpgradeable) を右クリックすると
- * アップグレード管理GUIを開く。
- */
 public class UpgradeApplicatorItem extends Item {
 
     public UpgradeApplicatorItem(Properties properties) {
@@ -34,14 +30,14 @@ public class UpgradeApplicatorItem extends Item {
         if (player == null) return InteractionResult.PASS;
 
         BlockEntity be = level.getBlockEntity(pos);
-        if (!(be instanceof IUpgradeable upgradeable)) {
+        if (!(be instanceof IModuleHolder)) {
             player.displayClientMessage(
                 Component.translatable("item.create_upgrades.applicator.not_supported"), true);
             return InteractionResult.FAIL;
         }
 
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            net.shishen575.create_upgrades.content.gui.UpgradeMenu.open(serverPlayer, pos);
+            ModuleMenu.open(serverPlayer, pos);
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
@@ -49,7 +45,7 @@ public class UpgradeApplicatorItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context,
-            List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+            List<Component> tooltipComponents, TooltipFlag flag) {
         tooltipComponents.add(Component.translatable("tooltip.create_upgrades.applicator"));
     }
 }
