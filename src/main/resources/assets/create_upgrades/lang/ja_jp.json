@@ -1,0 +1,34 @@
+{
+  "item.create_upgrades.upgrade_applicator": "アップグレード適用器",
+  "item.create_upgrades.speed_upgrade_1": "速度アップグレード I",
+  "item.create_upgrades.speed_upgrade_2": "速度アップグレード II",
+  "item.create_upgrades.speed_upgrade_3": "速度アップグレード III",
+  "item.create_upgrades.speed_upgrade_4": "速度アップグレード IV",
+  "item.create_upgrades.efficiency_upgrade_1": "効率アップグレード I",
+  "item.create_upgrades.efficiency_upgrade_2": "効率アップグレード II",
+  "item.create_upgrades.efficiency_upgrade_3": "効率アップグレード III",
+  "item.create_upgrades.efficiency_upgrade_4": "効率アップグレード IV",
+  "item.create_upgrades.stress_upgrade_1": "ストレス軽減アップグレード I",
+  "item.create_upgrades.stress_upgrade_2": "ストレス軽減アップグレード II",
+  "item.create_upgrades.stress_upgrade_3": "ストレス軽減アップグレード III",
+  "item.create_upgrades.stress_upgrade_4": "ストレス軽減アップグレード IV",
+  "item.create_upgrades.range_upgrade_1": "範囲アップグレード I",
+  "item.create_upgrades.range_upgrade_2": "範囲アップグレード II",
+  "item.create_upgrades.range_upgrade_3": "範囲アップグレード III",
+  "item.create_upgrades.range_upgrade_4": "範囲アップグレード IV",
+
+  "upgrade.create_upgrades.speed": "速度",
+  "upgrade.create_upgrades.efficiency": "効率",
+  "upgrade.create_upgrades.stress": "ストレス軽減",
+  "upgrade.create_upgrades.range": "範囲",
+
+  "tooltip.create_upgrades.level": "レベル: %s",
+  "tooltip.create_upgrades.speed_mult": "速度: %s",
+  "tooltip.create_upgrades.stress_mult": "ストレス消費: %s",
+  "tooltip.create_upgrades.process_mult": "処理速度: %s",
+  "tooltip.create_upgrades.range_bonus": "範囲: +%s ブロック",
+  "tooltip.create_upgrades.applicator": "右クリックでCreate機械のアップグレードを管理します。",
+  "item.create_upgrades.applicator.not_supported": "この機械はアップグレードに対応していません。",
+
+  "gui.create_upgrades.title": "機械アップグレード"
+}

@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.shishen575.create_upgrades.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "KineticBlockEntityMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
