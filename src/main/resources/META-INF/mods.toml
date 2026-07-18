@@ -1,0 +1,38 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mixins]]
+    config="create_upgrades.mixins.json"
+
+[[dependencies.create_upgrades]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.create_upgrades]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.20.2)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.create_upgrades]]
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[mods]]
+    modId="create_upgrades"
+    version="${file.jarVersion}"
+    displayName="Create: Upgrades"
+    description='''
+    Create の機械にアップグレードを追加できるアドオンです。
+    速度・ストレス・効率などのアップグレードを機械に装着できます。
+    他のアドオンの機械にも対応しています。
+    '''
+    authors="shishen575"

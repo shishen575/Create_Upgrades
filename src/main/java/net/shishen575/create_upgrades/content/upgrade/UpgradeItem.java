@@ -4,7 +4,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class UpgradeItem extends Item {
@@ -22,8 +24,9 @@ public class UpgradeItem extends Item {
     public int getLevel() { return level; }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, @Nullable Level world,
+            List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, world, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("tooltip.create_upgrades.level", level));
 
         float speedMult = upgradeType.getSpeedMultiplier(level);
