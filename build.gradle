@@ -34,8 +34,10 @@ minecraft {
 }
 
 repositories {
+    mavenLocal()
     maven { url = "https://maven.createmod.net" }
     maven { url = "https://maven.tterrag.com" }
+    maven { url = "https://www.cursemaven.com" }
     mavenCentral()
 }
 
