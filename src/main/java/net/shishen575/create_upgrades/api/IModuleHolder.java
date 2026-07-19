@@ -1,19 +1,20 @@
 package net.shishen575.create_upgrades.api;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.shishen575.create_upgrades.content.module.EfficiencyModuleItem;
 import net.shishen575.create_upgrades.content.module.SpeedModuleItem;
 import net.shishen575.create_upgrades.content.module.StackModuleItem;
 import net.shishen575.create_upgrades.content.module.TankModuleItem;
 
-/**
- * モジュールスロットを持つ BlockEntity が実装するインターフェース。
- * Create の標準機械は KineticBlockEntityMixin で自動実装される。
- */
 public interface IModuleHolder {
 
     int MODULE_SLOT_COUNT = 3;
@@ -25,17 +26,9 @@ public interface IModuleHolder {
 
     NonNullList<ItemStack> getModuleSlots();
 
-    default ItemStack getModule(int slot) {
-        return getModuleSlots().get(slot);
-    }
+    default ItemStack getModule(int slot) { return getModuleSlots().get(slot); }
+    default void setModule(int slot, ItemStack stack) { getModuleSlots().set(slot, stack); }
 
-    default void setModule(int slot, ItemStack stack) {
-        getModuleSlots().set(slot, stack);
-    }
-
-    // ---- 効果の集約計算 ----
-
-    /** 全スロットの速度倍率を掛け合わせて返す */
     default float getCombinedSpeedMultiplier() {
         float mult = 1.0f;
         for (ItemStack stack : getModuleSlots()) {
@@ -46,7 +39,6 @@ public interface IModuleHolder {
         return mult;
     }
 
-    /** 全スロットのストレス倍率を掛け合わせて返す */
     default float getCombinedStressMultiplier() {
         float mult = 1.0f;
         for (ItemStack stack : getModuleSlots()) {
@@ -57,27 +49,18 @@ public interface IModuleHolder {
         return mult;
     }
 
-    /**
-     * スタックモジュールによる処理量倍率を返す。
-     * IStackUpgradeable を実装した機械でのみ効果が出る。
-     */
     default int getStackMultiplier() {
         int mult = 1;
         for (ItemStack stack : getModuleSlots()) {
-            if (stack.getItem() instanceof StackModuleItem) {
-                mult *= StackModuleItem.STACK_MULTIPLIER;
-            }
+            if (stack.getItem() instanceof StackModuleItem) mult *= StackModuleItem.STACK_MULTIPLIER;
         }
         return mult;
     }
 
-    /** スタックモジュールによる処理時間倍率を返す */
     default float getStackProcessingTimeMult() {
         float mult = 1.0f;
         for (ItemStack stack : getModuleSlots()) {
-            if (stack.getItem() instanceof StackModuleItem) {
-                mult *= StackModuleItem.PROCESSING_TIME_MULT;
-            }
+            if (stack.getItem() instanceof StackModuleItem) mult *= StackModuleItem.PROCESSING_TIME_MULT;
         }
         return mult;
     }
@@ -91,22 +74,33 @@ public interface IModuleHolder {
     }
 
     // ---- NBT ----
+    // アイテムIDのみ保存 (1.21.1 で ItemStack.save() が HolderLookup.Provider を要求するため)
+    // モジュールは stacksTo(1) で追加NBTなしのためこれで十分
 
     default void saveModules(CompoundTag tag) {
         ListTag list = new ListTag();
         for (ItemStack stack : getModuleSlots()) {
-            list.add(stack.save(new CompoundTag()));
+            if (!stack.isEmpty()) {
+                list.add(StringTag.valueOf(BuiltInRegistries.ITEM.getKey(stack.getItem()).toString()));
+            } else {
+                list.add(StringTag.valueOf(""));
+            }
         }
         tag.put("CreateModules", list);
     }
 
     default void loadModules(CompoundTag tag) {
         if (!tag.contains("CreateModules")) return;
-        ListTag list = tag.getList("CreateModules", Tag.TAG_COMPOUND);
+        ListTag list = tag.getList("CreateModules", Tag.TAG_STRING);
         NonNullList<ItemStack> slots = getModuleSlots();
         for (int i = 0; i < Math.min(list.size(), slots.size()); i++) {
-            CompoundTag itemTag = list.getCompound(i);
-            slots.set(i, itemTag.isEmpty() ? ItemStack.EMPTY : ItemStack.of(itemTag));
+            String id = list.getString(i);
+            if (id.isEmpty()) {
+                slots.set(i, ItemStack.EMPTY);
+            } else {
+                Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
+                slots.set(i, item == Items.AIR ? ItemStack.EMPTY : new ItemStack(item));
+            }
         }
     }
 }

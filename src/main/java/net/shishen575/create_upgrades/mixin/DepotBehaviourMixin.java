@@ -1,6 +1,6 @@
 package net.shishen575.create_upgrades.mixin;
 
-import com.simibubi.create.content.kinetics.depot.DepotBlockEntity;
+import com.simibubi.create.content.logistics.depot.DepotBlockEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.shishen575.create_upgrades.api.IModuleHolder;
