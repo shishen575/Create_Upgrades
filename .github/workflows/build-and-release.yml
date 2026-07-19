@@ -1,0 +1,105 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - '1.21.1'
+      - '1.20.1'
+
+# バージョンバンプのコミット自体がこのワークフローを再トリガーしないようにする
+# コミットメッセージに [skip ci] を含めることで防ぐ
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build (${{ github.ref_name }})
+    runs-on: ubuntu-latest
+
+    # github-actions[bot] によるバンプコミットでは実行しない
+    if: github.actor != 'github-actions[bot]'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ブランチに応じて Java バージョンを切り替える
+      - name: Detect Java version
+        id: java
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          if [ "$BRANCH" = "1.21.1" ]; then
+            echo "version=21" >> $GITHUB_OUTPUT
+          else
+            echo "version=17" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Java ${{ steps.java.outputs.version }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ steps.java.outputs.version }}
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      # gradle.properties から現在のバージョンを読み取り、パッチを +1 する
+      - name: Bump patch version
+        id: version
+        run: |
+          CURRENT=$(grep '^mod_version=' gradle.properties | cut -d= -f2)
+          MAJOR=$(echo "$CURRENT" | cut -d. -f1)
+          MINOR=$(echo "$CURRENT" | cut -d. -f2)
+          PATCH=$(echo "$CURRENT" | cut -d. -f3)
+          NEW_PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
+          MC_VERSION=$(grep '^minecraft_version=' gradle.properties | cut -d= -f2)
+
+          # gradle.properties を更新
+          sed -i "s/^mod_version=.*/mod_version=$NEW_VERSION/" gradle.properties
+
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "mc_version=$MC_VERSION" >> $GITHUB_OUTPUT
+          echo "jar_name=Create_Upgrades-${MC_VERSION}-${NEW_VERSION}.jar" >> $GITHUB_OUTPUT
+          echo "tag=v${NEW_VERSION}-mc${MC_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add gradle.properties
+          git commit -m "chore: bump version to ${{ steps.version.outputs.version }} [skip ci]"
+          git push
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon
+
+      # build/libs/ から dev/sources jar を除いた製品 jar を取得
+      - name: Find jar
+        id: jar
+        run: |
+          JAR=$(find build/libs -name "Create_Upgrades-*.jar" ! -name "*-dev.jar" ! -name "*-sources.jar" | head -1)
+          echo "path=$JAR" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: "Create_Upgrades ${{ steps.version.outputs.version }} (MC ${{ steps.version.outputs.mc_version }})"
+          body: |
+            ## Create_Upgrades ${{ steps.version.outputs.version }}
+
+            **Minecraft:** ${{ steps.version.outputs.mc_version }}
+            **Branch:** ${{ github.ref_name }}
+
+            > ⚠️ これはテストビルドです。安定版ではありません。
+          prerelease: true
+          files: ${{ steps.jar.outputs.path }}
+          token: ${{ secrets.GITHUB_TOKEN }}

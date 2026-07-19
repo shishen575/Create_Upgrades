@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.shishen575.create_upgrades.content.module.EfficiencyModuleItem;
 import net.shishen575.create_upgrades.content.module.SpeedModuleItem;
 import net.shishen575.create_upgrades.content.module.StackModuleItem;
+import net.shishen575.create_upgrades.content.module.TankModuleItem;
 
 /**
  * モジュールスロットを持つ BlockEntity が実装するインターフェース。
@@ -77,6 +78,14 @@ public interface IModuleHolder {
             if (stack.getItem() instanceof StackModuleItem) {
                 mult *= StackModuleItem.PROCESSING_TIME_MULT;
             }
+        }
+        return mult;
+    }
+
+    default int getFluidCapacityMultiplier() {
+        int mult = 1;
+        for (ItemStack stack : getModuleSlots()) {
+            if (stack.getItem() instanceof TankModuleItem) mult *= TankModuleItem.CAPACITY_MULTIPLIER;
         }
         return mult;
     }

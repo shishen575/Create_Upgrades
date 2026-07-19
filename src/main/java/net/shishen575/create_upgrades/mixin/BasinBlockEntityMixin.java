@@ -4,6 +4,7 @@ import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.shishen575.create_upgrades.api.IModuleHolder;
+import net.shishen575.create_upgrades.api.IFluidCapacityUpgradeable;
 import net.shishen575.create_upgrades.api.IStackUpgradeable;
 import net.shishen575.create_upgrades.content.module.StackModuleItem;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,7 +22,7 @@ import java.util.List;
  * スタックモジュールが挿入されると、レシピ出力を multiplier 倍にして返す。
  */
 @Mixin(BasinBlockEntity.class)
-public abstract class BasinBlockEntityMixin implements IStackUpgradeable {
+public abstract class BasinBlockEntityMixin implements IStackUpgradeable, IFluidCapacityUpgradeable {
 
     /**
      * レシピ出力アイテムリストを取得した直後にスタック倍率を適用する。
