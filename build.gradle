@@ -55,7 +55,7 @@ dependencies {
 }
 
 jar {
-    archiveFileName = "Create_Upgrades-${mcVersion}-${modVersion}.jar"
+    archiveFileName = "Create-Upgrades-${mcVersion}-${modVersion}.jar"
     manifest {
         attributes([
             'Specification-Title'     : 'create_upgrades',
