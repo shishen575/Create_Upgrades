@@ -64,7 +64,7 @@ jobs:
 
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "mc_version=$MC_VERSION" >> $GITHUB_OUTPUT
-          echo "jar_name=Create_Upgrades-${MC_VERSION}-${NEW_VERSION}.jar" >> $GITHUB_OUTPUT
+          echo "jar_name=Create-Upgrades-${MC_VERSION}-${NEW_VERSION}.jar" >> $GITHUB_OUTPUT
           echo "tag=v${NEW_VERSION}-mc${MC_VERSION}" >> $GITHUB_OUTPUT
 
       - name: Commit version bump
@@ -85,7 +85,7 @@ jobs:
       - name: Find jar
         id: jar
         run: |
-          JAR=$(find build/libs -name "Create_Upgrades-*.jar" ! -name "*-dev.jar" ! -name "*-sources.jar" | head -1)
+          JAR=$(find build/libs -name "Create-Upgrades-*.jar" ! -name "*-dev.jar" ! -name "*-sources.jar" | head -1)
           echo "path=$JAR" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
