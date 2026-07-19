@@ -6,8 +6,8 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.shishen575.create_upgrades.content.module.EfficiencyModuleItem;
-import net.shishen575.create_upgrades.content.module.MachineModuleItem;
 import net.shishen575.create_upgrades.content.module.SpeedModuleItem;
+import net.shishen575.create_upgrades.content.module.StackModuleItem;
 
 /**
  * モジュールスロットを持つ BlockEntity が実装するインターフェース。
@@ -52,6 +52,22 @@ public interface IModuleHolder {
             if (stack.isEmpty()) continue;
             if (stack.getItem() instanceof SpeedModuleItem)      mult *= SpeedModuleItem.STRESS_MULT;
             if (stack.getItem() instanceof EfficiencyModuleItem) mult *= EfficiencyModuleItem.STRESS_MULT;
+        }
+        return mult;
+    }
+
+    default int getStackMultiplier() {
+        int mult = 1;
+        for (ItemStack stack : getModuleSlots()) {
+            if (stack.getItem() instanceof StackModuleItem) mult *= StackModuleItem.STACK_MULTIPLIER;
+        }
+        return mult;
+    }
+
+    default float getStackProcessingTimeMult() {
+        float mult = 1.0f;
+        for (ItemStack stack : getModuleSlots()) {
+            if (stack.getItem() instanceof StackModuleItem) mult *= StackModuleItem.PROCESSING_TIME_MULT;
         }
         return mult;
     }

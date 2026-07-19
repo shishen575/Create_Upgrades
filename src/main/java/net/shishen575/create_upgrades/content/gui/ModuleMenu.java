@@ -13,7 +13,9 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.shishen575.create_upgrades.api.IModuleHolder;
+import net.shishen575.create_upgrades.api.IStackUpgradeable;
 import net.shishen575.create_upgrades.content.module.MachineModuleItem;
+import net.shishen575.create_upgrades.content.module.StackModuleItem;
 import net.shishen575.create_upgrades.registry.CUMenuTypes;
 
 /**
@@ -48,13 +50,16 @@ public class ModuleMenu extends AbstractContainerMenu {
 
         // モジュールスロッ�� (3つ, 横並び, GUI 中央上部)
         NonNullList<ItemStack> slots = holder.getModuleSlots();
+        boolean isStackCapable = holder instanceof IStackUpgradeable;
         ModuleContainer container = new ModuleContainer(holder);
         for (int i = 0; i < IModuleHolder.MODULE_SLOT_COUNT; i++) {
             final int slotIndex = i;
             addSlot(new Slot(container, slotIndex, 53 + i * 22, 20) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
-                    return stack.getItem() instanceof MachineModuleItem;
+                    if (!(stack.getItem() instanceof MachineModuleItem)) return false;
+                    if (stack.getItem() instanceof StackModuleItem && !isStackCapable) return false;
+                    return true;
                 }
             });
         }

@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.shishen575.create_upgrades.content.module.EfficiencyModuleItem;
 import net.shishen575.create_upgrades.content.module.SpeedModuleItem;
+import net.shishen575.create_upgrades.content.module.StackModuleItem;
 import net.shishen575.create_upgrades.content.upgrade.UpgradeApplicatorItem;
 
 public class CUItems {
@@ -25,6 +26,10 @@ public class CUItems {
     public static final RegistryObject<EfficiencyModuleItem> EFFICIENCY_MODULE = ITEMS.register(
         "efficiency_module",
         () -> new EfficiencyModuleItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<StackModuleItem> STACK_MODULE = ITEMS.register(
+        "stack_module",
+        () -> new StackModuleItem(new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);

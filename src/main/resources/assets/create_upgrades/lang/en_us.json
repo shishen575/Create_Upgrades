@@ -2,12 +2,16 @@
   "item.create_upgrades.module_applicator": "Module Applicator",
   "item.create_upgrades.speed_module": "Speed Module",
   "item.create_upgrades.efficiency_module": "Efficiency Module",
+  "item.create_upgrades.stack_module": "Stack Module",
 
   "tooltip.create_upgrades.speed_module.benefit": "Processing Speed %s",
   "tooltip.create_upgrades.speed_module.drawback": "Stress Consumption %s",
 
   "tooltip.create_upgrades.efficiency_module.benefit": "Stress Consumption %s",
   "tooltip.create_upgrades.efficiency_module.drawback": "Processing Speed %s",
+
+  "tooltip.create_upgrades.stack_module.benefit": "Output Amount ×2 (Basin/Depot only)",
+  "tooltip.create_upgrades.stack_module.drawback": "Processing Time ×1.8",
 
   "tooltip.create_upgrades.module_slot_hint": "Apply with Module Applicator",
   "tooltip.create_upgrades.applicator": "Right-click a Create machine to manage modules.",
