@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.shishen575.create_upgrades.api.IFluidCapacityUpgradeable;
 import net.shishen575.create_upgrades.api.IModuleHolder;
 import net.shishen575.create_upgrades.api.IStackUpgradeable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,7 +34,7 @@ public abstract class StorageBlockEntityMixin implements IModuleHolder {
 
     @Inject(method = "write", at = @At("TAIL"))
     private void create_upgrades$onWrite(CompoundTag tag, boolean clientPacket, CallbackInfo ci) {
-        if ((Object) this instanceof IStackUpgradeable) saveModules(tag);
+        if ((Object) this instanceof IStackUpgradeable || (Object) this instanceof IFluidCapacityUpgradeable) saveModules(tag);
     }
 
     @Inject(method = "read", at = @At("TAIL"))

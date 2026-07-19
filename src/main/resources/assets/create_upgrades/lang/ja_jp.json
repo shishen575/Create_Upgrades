@@ -3,15 +3,21 @@
   "item.create_upgrades.speed_module": "速度モジュール",
   "item.create_upgrades.efficiency_module": "効率モジュール",
   "item.create_upgrades.stack_module": "スタックモジュール",
+  "item.create_upgrades.tank_module": "タンクモジュール",
 
-  "tooltip.create_upgrades.speed_module.benefit": "処理速度 %s",
-  "tooltip.create_upgrades.speed_module.drawback": "ストレス消費 %s",
+  "tooltip.create_upgrades.speed_module.benefit": "処理速度 ×1.5",
+  "tooltip.create_upgrades.speed_module.drawback": "ストレス消費 ×1.6",
 
-  "tooltip.create_upgrades.efficiency_module.benefit": "ストレス消費 %s",
-  "tooltip.create_upgrades.efficiency_module.drawback": "処理速度 %s",
+  "tooltip.create_upgrades.efficiency_module.benefit": "ストレス消費 ×0.5",
+  "tooltip.create_upgrades.efficiency_module.drawback": "処理速度 ×0.7",
 
   "tooltip.create_upgrades.stack_module.benefit": "処理量 ×2 (釜・デポ専用)",
   "tooltip.create_upgrades.stack_module.drawback": "処理時間 ×1.8",
+  "tooltip.create_upgrades.stack_module.not_compatible": "この機械には使用できません",
+
+  "tooltip.create_upgrades.tank_module.benefit": "流体容量 ×2 (釜・タンク専用)",
+  "tooltip.create_upgrades.tank_module.drawback": "流体転送速度 ×0.5",
+  "tooltip.create_upgrades.tank_module.not_compatible": "この機械には使用できません",
 
   "tooltip.create_upgrades.module_slot_hint": "モジュール適用器で機械に装着",
   "tooltip.create_upgrades.applicator": "右クリックでCreate機械のモジュールを管理します。",

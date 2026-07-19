@@ -7,7 +7,8 @@
     "KineticBlockEntityMixin",
     "StorageBlockEntityMixin",
     "BasinBlockEntityMixin",
-    "DepotBehaviourMixin"
+    "DepotBehaviourMixin",
+    "FluidTankBlockEntityMixin"
   ],
   "client": [],
   "injectors": {

@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.shishen575.create_upgrades.content.module.EfficiencyModuleItem;
 import net.shishen575.create_upgrades.content.module.SpeedModuleItem;
 import net.shishen575.create_upgrades.content.module.StackModuleItem;
+import net.shishen575.create_upgrades.content.module.TankModuleItem;
 
 /**
  * モジュールスロットを持つ BlockEntity が実装するインターフェース。
@@ -56,18 +57,35 @@ public interface IModuleHolder {
         return mult;
     }
 
+    /**
+     * スタックモジュールによる処理量倍率を返す。
+     * IStackUpgradeable を実装した機械でのみ効果が出る。
+     */
     default int getStackMultiplier() {
         int mult = 1;
         for (ItemStack stack : getModuleSlots()) {
-            if (stack.getItem() instanceof StackModuleItem) mult *= StackModuleItem.STACK_MULTIPLIER;
+            if (stack.getItem() instanceof StackModuleItem) {
+                mult *= StackModuleItem.STACK_MULTIPLIER;
+            }
         }
         return mult;
     }
 
+    /** スタックモジュールによる処理時間倍率を返す */
     default float getStackProcessingTimeMult() {
         float mult = 1.0f;
         for (ItemStack stack : getModuleSlots()) {
-            if (stack.getItem() instanceof StackModuleItem) mult *= StackModuleItem.PROCESSING_TIME_MULT;
+            if (stack.getItem() instanceof StackModuleItem) {
+                mult *= StackModuleItem.PROCESSING_TIME_MULT;
+            }
+        }
+        return mult;
+    }
+
+    default int getFluidCapacityMultiplier() {
+        int mult = 1;
+        for (ItemStack stack : getModuleSlots()) {
+            if (stack.getItem() instanceof TankModuleItem) mult *= TankModuleItem.CAPACITY_MULTIPLIER;
         }
         return mult;
     }

@@ -3,15 +3,21 @@
   "item.create_upgrades.speed_module": "Speed Module",
   "item.create_upgrades.efficiency_module": "Efficiency Module",
   "item.create_upgrades.stack_module": "Stack Module",
+  "item.create_upgrades.tank_module": "Tank Module",
 
-  "tooltip.create_upgrades.speed_module.benefit": "Processing Speed %s",
-  "tooltip.create_upgrades.speed_module.drawback": "Stress Consumption %s",
+  "tooltip.create_upgrades.speed_module.benefit": "Processing Speed ×1.5",
+  "tooltip.create_upgrades.speed_module.drawback": "Stress Consumption ×1.6",
 
-  "tooltip.create_upgrades.efficiency_module.benefit": "Stress Consumption %s",
-  "tooltip.create_upgrades.efficiency_module.drawback": "Processing Speed %s",
+  "tooltip.create_upgrades.efficiency_module.benefit": "Stress Consumption ×0.5",
+  "tooltip.create_upgrades.efficiency_module.drawback": "Processing Speed ×0.7",
 
   "tooltip.create_upgrades.stack_module.benefit": "Output Amount ×2 (Basin/Depot only)",
   "tooltip.create_upgrades.stack_module.drawback": "Processing Time ×1.8",
+  "tooltip.create_upgrades.stack_module.not_compatible": "Cannot be used on this machine",
+
+  "tooltip.create_upgrades.tank_module.benefit": "Fluid Capacity ×2 (Basin/Tank only)",
+  "tooltip.create_upgrades.tank_module.drawback": "Fluid Transfer Speed ×0.5",
+  "tooltip.create_upgrades.tank_module.not_compatible": "Cannot be used on this machine",
 
   "tooltip.create_upgrades.module_slot_hint": "Apply with Module Applicator",
   "tooltip.create_upgrades.applicator": "Right-click a Create machine to manage modules.",

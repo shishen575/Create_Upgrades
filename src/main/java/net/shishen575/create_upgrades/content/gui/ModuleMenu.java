@@ -12,10 +12,13 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.network.NetworkHooks;
 import net.shishen575.create_upgrades.api.IModuleHolder;
+import net.shishen575.create_upgrades.api.IFluidCapacityUpgradeable;
 import net.shishen575.create_upgrades.api.IStackUpgradeable;
 import net.shishen575.create_upgrades.content.module.MachineModuleItem;
 import net.shishen575.create_upgrades.content.module.StackModuleItem;
+import net.shishen575.create_upgrades.content.module.TankModuleItem;
 import net.shishen575.create_upgrades.registry.CUMenuTypes;
 
 /**
@@ -30,7 +33,7 @@ public class ModuleMenu extends AbstractContainerMenu {
     public static void open(ServerPlayer player, BlockPos pos) {
         BlockEntity be = player.level().getBlockEntity(pos);
         if (!(be instanceof IModuleHolder holder)) return;
-        player.openMenu(new MenuProvider() {
+        NetworkHooks.openScreen(player, new MenuProvider() {
             @Override
             public net.minecraft.network.chat.Component getDisplayName() {
                 return net.minecraft.network.chat.Component.translatable("gui.create_upgrades.title");
@@ -51,14 +54,16 @@ public class ModuleMenu extends AbstractContainerMenu {
         // モジュールスロッ�� (3つ, 横並び, GUI 中央上部)
         NonNullList<ItemStack> slots = holder.getModuleSlots();
         boolean isStackCapable = holder instanceof IStackUpgradeable;
+        boolean isTankCapable = holder instanceof IFluidCapacityUpgradeable;
         ModuleContainer container = new ModuleContainer(holder);
         for (int i = 0; i < IModuleHolder.MODULE_SLOT_COUNT; i++) {
-            final int slotIndex = i;
-            addSlot(new Slot(container, slotIndex, 53 + i * 22, 20) {
+            addSlot(new Slot(container, i, 53 + i * 22, 20) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     if (!(stack.getItem() instanceof MachineModuleItem)) return false;
+                    // スタックモジュールは IStackUpgradeable な機械にのみ挿入可能
                     if (stack.getItem() instanceof StackModuleItem && !isStackCapable) return false;
+                    if (stack.getItem() instanceof TankModuleItem && !isTankCapable) return false;
                     return true;
                 }
             });
