@@ -6,9 +6,8 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.shishen575.create_upgrades.content.module.EfficiencyModuleItem;
-import net.shishen575.create_upgrades.content.module.FortuneModuleItem;
-import net.shishen575.create_upgrades.content.module.MachineModuleItem;
 import net.shishen575.create_upgrades.content.module.SpeedModuleItem;
+import net.shishen575.create_upgrades.content.module.StackModuleItem;
 
 /**
  * モジュールスロットを持つ BlockEntity が実装するインターフェース。
@@ -57,30 +56,29 @@ public interface IModuleHolder {
         return mult;
     }
 
-    /** 幸運モジュールが少なくとも1枚挿入されているか */
-    default boolean hasFortuneModule() {
-        for (ItemStack stack : getModuleSlots()) {
-            if (stack.getItem() instanceof FortuneModuleItem) return true;
-        }
-        return false;
-    }
-
     /**
-     * 処理完了時に呼ぶ。幸運モジュールの耐久を消費し、壊れたスロットをクリアする。
-     * @return 副産物ボーナスを付与すべきかどうか
+     * スタックモジュールによる処理量倍率を返す。
+     * IStackUpgradeable を実装した機械でのみ効果が出る。
      */
-    default boolean onProcessingComplete(net.minecraft.util.RandomSource random) {
-        boolean grantBonus = false;
-        NonNullList<ItemStack> slots = getModuleSlots();
-        for (int i = 0; i < slots.size(); i++) {
-            ItemStack stack = slots.get(i);
-            if (!(stack.getItem() instanceof FortuneModuleItem)) continue;
-            if (random.nextFloat() < FortuneModuleItem.BONUS_CHANCE) grantBonus = true;
-            if (FortuneModuleItem.consumeDurability(stack)) {
-                slots.set(i, ItemStack.EMPTY); // 耐久切れで消去
+    default int getStackMultiplier() {
+        int mult = 1;
+        for (ItemStack stack : getModuleSlots()) {
+            if (stack.getItem() instanceof StackModuleItem) {
+                mult *= StackModuleItem.STACK_MULTIPLIER;
             }
         }
-        return grantBonus;
+        return mult;
+    }
+
+    /** スタックモジュールによる処理時間倍率を返す */
+    default float getStackProcessingTimeMult() {
+        float mult = 1.0f;
+        for (ItemStack stack : getModuleSlots()) {
+            if (stack.getItem() instanceof StackModuleItem) {
+                mult *= StackModuleItem.PROCESSING_TIME_MULT;
+            }
+        }
+        return mult;
     }
 
     // ---- NBT ----

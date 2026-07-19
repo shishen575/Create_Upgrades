@@ -4,7 +4,10 @@
   "package": "net.shishen575.create_upgrades.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "KineticBlockEntityMixin"
+    "KineticBlockEntityMixin",
+    "StorageBlockEntityMixin",
+    "BasinBlockEntityMixin",
+    "DepotBehaviourMixin"
   ],
   "client": [],
   "injectors": {
